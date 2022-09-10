@@ -1,7 +1,7 @@
 nested_list = [
     ['a', 'b', 'c'],
     ['d', 'e', 'f', 'h', False],
-    [1, 2, None],[]
+    [1, 2, None], []
 ]
 
 class FlatIterator():
@@ -23,22 +23,23 @@ class FlatIterator():
         return self.collection[self.cursor][self.cursor_index]
                 
       
-for i in FlatIterator(nested_list):
-    print(i)
+# for i in FlatIterator(nested_list):
+#     print(i)
 
-flat_list = [item for item in FlatIterator(nested_list)]
-print(flat_list)
+# flat_list = [item for item in FlatIterator(nested_list)]
+# print(flat_list)
 
-def my_next(nested_list):
+def my_next(some_list):
     cursor = 0
     cursor_index = -1
-    cursor_index += 1
-    while cursor > len(nested_list) - 1:
-        cursor +=1
-        cursor_index = 0
-        if cursor_index > len(nested_list) - 1:
-            break
-        yield nested_list[cursor][cursor_index]
+    while True:
+        cursor_index += 1
+        while cursor_index > len(some_list[cursor]) - 1:
+            cursor +=1
+            cursor_index = 0
+            if cursor > len(some_list) - 1:
+                return
+        yield some_list[cursor][cursor_index]
 
-for item in  my_next(nested_list):
-	print(item)
+for item in my_next(nested_list):
+    print(item)
